@@ -135,8 +135,8 @@ else:
     home = getenv('HOME')
 
 CODES = [200, 301, 302, 405, 418]
-LOG_FILE = home + '/.local/share/nexfil/exceptions.log'
-LOC_DATA = home + '/.local/share/nexfil/dumps/'
+LOG_FILE = home + '/exceptions.log'
+LOC_DATA = home + '/dumps/'
 
 if not path.exists(LOC_DATA):
     makedirs(LOC_DATA)

@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 .vscode/
-.local/share/nexfil/dumps/
+dumps/

@@ -8,7 +8,7 @@ Y = '\033[33m'  # yellow
 
 
 async def clout(url):
-    from nexfil.share import found
+    from share import found
     found.append(url)
     url = str(url)
     ext = tldextract.extract(url)

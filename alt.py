@@ -1,5 +1,5 @@
-from nexfil.printer import clout
-from nexfil.write_log import log_writer
+from printer import clout
+from write_log import log_writer
 
 
 async def test_alt(session, use_proxy, proxy_url, url, alt_url):

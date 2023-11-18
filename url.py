@@ -1,5 +1,5 @@
 import tldextract
-from nexfil.printer import clout
+from printer import clout
 
 
 async def test_url(url):

@@ -8,7 +8,7 @@
 * Batch processing
   * Usernames can be provided from command-line
   * List of usernames can be provided from a file
-* Results are automatically saved in txt file
+* Results are automatically saved in txt file in `/dumps`
 
 ## Usage
 

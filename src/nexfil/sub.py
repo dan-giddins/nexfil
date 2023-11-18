@@ -1,4 +1,4 @@
-from nexfil.printer import clout
+from printer import clout
 
 
 async def test_sub(url, resp_url):

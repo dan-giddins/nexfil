@@ -1,6 +1,6 @@
 import asyncio
-from nexfil.printer import clout
-from nexfil.write_log import log_writer
+from printer import clout
+from write_log import log_writer
 
 codes = [200, 400, 405, 410, 418, 500, 503]
 

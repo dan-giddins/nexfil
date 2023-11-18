@@ -30,10 +30,10 @@ dynamic = ["version", "readme"]
 
 [tool.setuptools.dynamic]
 readme = {file = ["README.md"], content-type = "text/markdown"}
-version = {attr = "nexfil.cli.SCRIPT_V"}
+version = {attr = "nexfil.SCRIPT_V"}
 
 [project.scripts]
-nexfil = "nexfil.cli:cli"
+nexfil = "nexfil:cli"
 
 [project.urls]
 Repository = "https://github.com/thewhiteh4t/nexfil"

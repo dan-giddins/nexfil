@@ -47,7 +47,7 @@ if PROXY_HOST is not None and PROXY_PORT is not None:
 from json import loads
 from packaging import version
 from requests import get
-from nexfil.write_log import log_writer
+from write_log import log_writer
 
 
 def chk_update():
@@ -106,7 +106,7 @@ elif ULIST is not None:
 else:
     pass
 
-from nexfil.printer import smsg, emsg, wmsg, clout, pprog
+from printer import smsg, emsg, wmsg, clout, pprog
 
 smsg('Importing Modules...', '+')
 
@@ -116,15 +116,15 @@ import aiohttp
 from datetime import datetime
 from os import getenv, path, makedirs, getcwd
 
-from nexfil.url import test_url
-from nexfil.alt import test_alt
-from nexfil.api import test_api
-from nexfil.sub import test_sub
-from nexfil.string_case import test_string
-from nexfil.method import test_method
-from nexfil.redirect import test_redirect
-from nexfil.headless import test_driver
-import nexfil.share
+from url import test_url
+from alt import test_alt
+from api import test_api
+from sub import test_sub
+from string_case import test_string
+from method import test_method
+from redirect import test_redirect
+from headless import test_driver
+import share
 
 from selenium.common.exceptions import WebDriverException
 
@@ -141,7 +141,7 @@ LOC_DATA = home + '/.local/share/nexfil/dumps/'
 if not path.exists(LOC_DATA):
     makedirs(LOC_DATA)
 
-nexfil.share.LOG_FILE_PATH = LOG_FILE
+share.LOG_FILE_PATH = LOG_FILE
 
 
 def print_banner():
@@ -207,21 +207,21 @@ async def query(session, browser, url, test, data, uname):
             elif response.status == 404 and test == 'method':
                 await test_method(session, USE_PROXY, proxy_url, url)
             elif response.status != 404:
-                nexfil.share.errors.append(url)
+                share.errors.append(url)
             else:
                 pass
     except asyncio.exceptions.TimeoutError as exc:
-        nexfil.share.timedout.append(url)
+        share.timedout.append(url)
         log_writer(f'nexfil, {exc}, {url}')
     except aiohttp.ClientError as exc:
-        nexfil.share.errors.append(url)
+        share.errors.append(url)
         log_writer(f'nexfil, {exc}, {url}')
     except WebDriverException as exc:
-        nexfil.share.errors.append(url)
+        share.errors.append(url)
         log_writer(f'nexfil, {exc}, {url}')
 
-    nexfil.share.COUNTER += 1
-    await pprog(nexfil.share.COUNTER)
+    share.COUNTER += 1
+    await pprog(share.COUNTER)
 
 
 def autosave(uname, ulist, mode, found, start_time, end_time):
@@ -244,8 +244,8 @@ def autosave(uname, ulist, mode, found, start_time, end_time):
         outfile.write(f'Start Time : {start_time.strftime("%c")}\n')
         outfile.write(f'End Time : {end_time.strftime("%c")}\n')
         outfile.write(f'Total Hits : {len(found)}\n')
-        outfile.write(f'Total Timeouts : {len(nexfil.share.timedout)}\n')
-        outfile.write(f'Total Errors : {len(nexfil.share.errors)}\n\n')
+        outfile.write(f'Total Timeouts : {len(share.timedout)}\n')
+        outfile.write(f'Total Errors : {len(share.errors)}\n\n')
         outfile.write('URLs : \n\n')
         for url in found:
             outfile.write(f'{url}\n')
@@ -356,13 +356,13 @@ def cli():
 
         print('\n')
         smsg(f'Completed In         : {h_delta}', '>')
-        smsg(f'Total Profiles Found : {len(nexfil.share.found)}', '>')
-        smsg(f'Total Timeouts       : {len(nexfil.share.timedout)}', '>')
-        smsg(f'Total Exceptions     : {len(nexfil.share.errors)}', '>')
+        smsg(f'Total Profiles Found : {len(share.found)}', '>')
+        smsg(f'Total Timeouts       : {len(share.timedout)}', '>')
+        smsg(f'Total Exceptions     : {len(share.errors)}', '>')
         print()
 
-        if len(nexfil.share.found) != 0:
-            autosave(UNAME, ULIST, MODE, nexfil.share.found, start_time, end_time)
+        if len(share.found) != 0:
+            autosave(UNAME, ULIST, MODE, share.found, start_time, end_time)
         else:
             pass
         log_writer('----- COMPLETED -----')
@@ -372,3 +372,5 @@ def cli():
         log_writer('nexfil, recieved keyboard interrupt')
         log_writer('----- COMPLETED -----')
         sys.exit()
+
+cli()
